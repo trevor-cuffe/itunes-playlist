@@ -1,0 +1,18 @@
+.hero {
+	background-image: linear-gradient(to bottom, $color-blue-light-2, $color-blue-dark-1);
+
+	&__body {
+		color: $color-white;
+		padding: 3rem;
+	}
+
+	&__title {
+		font-weight: 600;
+		font-size: 5rem;
+		text-align: center;
+
+		&--icon {
+			margin-left: 2rem;
+		}
+	}
+}
