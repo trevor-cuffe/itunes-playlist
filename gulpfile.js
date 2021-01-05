@@ -18,7 +18,7 @@ const paths = {
 	},
 	sass    : {
 		src  : 'app/scss/**/*.scss',
-		main : 'app/scss/*.scss',
+		// main : 'app/scss/*.scss',
 		dest : 'app/css'
 	},
 	styles  : {
@@ -66,7 +66,7 @@ export const clean = () => {
 export function compSass() {
 	//prettier-ignore
 	return gulp
-        .src(paths.sass.main)
+        .src(paths.sass.src)
         .pipe(sass())
         .pipe(gulp.dest(paths.sass.dest))
         .pipe(browsersync.stream());

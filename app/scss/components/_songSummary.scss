@@ -1,0 +1,109 @@
+.songSummary {
+	display: flex;
+	position: relative;
+	align-items: center;
+	padding: 2rem;
+	background-color: $color-blue-light-3;
+	border-radius: 1rem;
+
+	&.hidden {
+		display: none;
+	}
+
+	a {
+		text-decoration: none;
+		color: $color-dark-grey;
+		&:hover {
+			color: $color-grey;
+		}
+	}
+
+	&__image {
+		flex: 0 0 100px;
+		max-height: 100px;
+
+		@include respond(phone) {
+			flex: 0 0 75px;
+			max-height: 75px;
+		}
+
+		@media only screen and (max-width: 400px) {
+			flex: 0 0 50px;
+			max-height: 50px;
+		}
+	}
+
+	&__contentBlock {
+		flex: 1 1 auto;
+		margin: 0 3rem;
+	}
+
+	&__title {
+		margin-bottom: 0.5rem;
+
+		@include respond(phone) {
+			line-height: 1.2;
+		}
+	}
+
+	&__artist {
+		font-style: italic;
+		font-weight: 600;
+	}
+
+	&__preview,
+	&__preview * {
+		&:focus {
+			outline: none;
+		}
+	}
+
+	&__preview {
+		margin-top: 1rem;
+	}
+
+	&__audio {
+		height: 4rem;
+		max-width: 80%;
+
+		@include respond(phone) {
+			transform: scale(0.5);
+			transform-origin: 0%;
+			max-width: 160%;
+		}
+	}
+
+	&__addToPlaylist {
+		&--container {
+			flex: 0 0 5rem;
+			height: 5rem;
+			width: 5rem;
+			position: relative;
+		}
+
+		&--button {
+			height: 3rem;
+			width: 3rem;
+			border-radius: 50%;
+			background-color: $color-blue-dark-3;
+			color: $color-white;
+			border: none;
+			outline: none;
+			transition: all 0.2s;
+
+			&:hover {
+				cursor: pointer;
+				transform: translate(-50%, -50%) translateY(-0.2rem);
+				box-shadow: 0 0.2rem 0.3rem 0.1rem rgba($color-black, 0.3);
+				background-color: $color-blue-dark-1;
+			}
+
+			&:focus {
+				background-color: $color-white;
+				color: $color-blue-light-2;
+			}
+
+			@include center-x-y;
+		}
+	}
+}

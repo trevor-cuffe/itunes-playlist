@@ -1,6 +1,5 @@
 .autocomplete {
 	position: relative;
-	margin-bottom: 3rem;
 
 	&__label {
 		font-weight: 700;
@@ -21,6 +20,7 @@
 		max-width: 100%;
 		min-width: 70%;
 		background-color: white;
+		z-index: 10;
 
 		&.is-active {
 			height: unset;

@@ -44,23 +44,6 @@ for (widget of searchWidgets) {
 
 		// how to render each dropdown result
 		renderOption   : (song) => {
-			//artistName
-			//artistViewUrl
-			//artworkUrl30 (or 60, 100)
-			//country
-			//kind: "song"
-			//previewUrl
-			//primaryGenreName
-			//relseaseDate
-			//trackCensoredName
-			//trackExplicitness
-			//trackId
-			//trackName
-			//trackNumber
-			//collectionName
-			//collectionId
-			//collectionViewUrl
-
 			return `
                 <div class="autocomplete__dropdown-item--image">
                     <img src=${song.artworkUrl100}>
@@ -116,7 +99,22 @@ const onSongSelect = (song, root) => {
 };
 
 const songTemplate = (song) => {
-	console.dir(song);
+	//artistName
+	//artistViewUrl
+	//artworkUrl30 (or 60, 100)
+	//country
+	//kind: "song"
+	//previewUrl
+	//primaryGenreName
+	//relseaseDate
+	//trackCensoredName
+	//trackExplicitness
+	//trackId
+	//trackName
+	//trackNumber
+	//collectionName
+	//collectionId
+	//collectionViewUrl
 
 	const albumArt = song.artworkUrl100;
 	const title = song.trackName;
@@ -127,19 +125,30 @@ const songTemplate = (song) => {
 	const preview = song.previewUrl;
 
 	return `
-        <div class="songSummary">
-            <img class="songSummary__image" src="${albumArt}">
-            <div class="songSummary__contentBlock">
-                <h3 class="songSummary__title">${title}</h3>
-                <a class="songSummary__artist" href="${artistSrc}">${artist}</a> : 
-                <a class="songSummary__album" href="${albumSrc}">${album}</a>
-                <div class="songSummary__preview">
-                    <audio class="songSummary__audio" src="${preview}" controls>
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-
-        </div>
+		<img class="songSummary__image" src="${albumArt}">
+		<div class="songSummary__contentBlock">
+			<h3 class="songSummary__title" data-title="${title}">${title}</h3>
+			<a class="songSummary__artist" href="${artistSrc}"  data-artist="${artist}">${artist}</a> : 
+			<a class="songSummary__album" href="${albumSrc}"  data-album="${album}">${album}</a>
+			<div class="songSummary__preview">
+				<audio class="songSummary__audio" src="${preview}" controls>
+					Your browser does not support the audio element.
+				</audio>
+			</div>
+		</div>
+		<div class="songSummary__addToPlaylist--container">
+			<button class="songSummary__addToPlaylist--button"><i class="fas fa-plus"></i>
+			</button>
+		</div>
     `;
 };
+
+// Connect song summary to playlist
+const songSummary = document.querySelector('.songSummary');
+const playlist = document.querySelector('.playlist-container');
+
+createPlaylist({
+	root        : playlist,
+	songsummary : songSummary,
+	renderItem  : (newItem) => {}
+});
