@@ -10,6 +10,13 @@ function createPlaylist({ root, songsummary, renderItem }) {
 			addItemToPlaylist(playlist, song);
 		}
 	});
+
+	//Prevent button from receiving focus on click
+	songsummary.addEventListener('mousedown', function(event) {
+		if (event.target.closest('.songSummary__addToPlaylist--button')) {
+			event.preventDefault();
+		}
+	});
 }
 
 // Methods
@@ -51,6 +58,13 @@ function addItemToPlaylist(playlist, { title, artist, album, preview }) {
 			const buttonClass = pause ? 'play' : 'pause';
 			audioButton.innerHTML = `<i class="fas fa-${buttonClass}"></i>`;
 			audioButton.classList.toggle('playing');
+		}
+	});
+
+	//Prevent button from receiving focus on click
+	newSong.addEventListener('mousedown', function(event) {
+		if (event.target.closest('.playlist__song--play-pause-button')) {
+			event.preventDefault();
 		}
 	});
 
