@@ -25,31 +25,46 @@ function getSongFromSummary(songSummaryContainer) {
 }
 
 function addItemToPlaylist(playlist, { title, artist, album, preview }) {
-	//===create div container for song===//
+	//===create new song element from template
 	const newSong = document.createElement('div');
 	newSong.classList.add('playlist__song');
+	newSong.innerHTML = playlist_song_template(song);
 
-	//===create title element===//
-	const songTitle = document.createElement('span');
-	songTitle.classList.add('playlist__song--title');
-	songTitle.innerText = `${title}`;
-	//append to newSong
-	newSong.appendChild(songTitle);
+	//===add event listener for play/pause button===//
+	newSong.addEventListener('click', function(event) {
+		//check if the user clicked on the audio button or it's containing elements
+		if (event.target.closest('.playlist__song--play-pause-button')) {
+			let audioElement = this.querySelector('.playlist__song--audio');
+			let audioButton = this.querySelector('.playlist__song--play-pause-button');
 
-	//===create info element===//
-	const songInfo = document.createElement('span');
-	songInfo.classList.add('playlist__song--info');
-	songInfo.innerHTML = `<strong>${artist}</strong>: ${album}`;
-	//append to newSong
-	newSong.appendChild(songInfo);
+			//decide whether to play or pause the audio
+			const pause = audioButton.classList.contains('playing');
 
-	//===create audio controls element===//
-	const songAudio = document.createElement('audio');
-	songAudio.classList.add('playlist__song--audio');
-	songAudio.src = `${preview}`;
-	//append to newSong
-	newSong.appendChild(songAudio);
+			//run method in audio controls
+			if (pause) {
+				audioElement.pause();
+			} else {
+				audioElement.play();
+			}
+
+			//change button
+			const buttonClass = pause ? 'play' : 'pause';
+			audioButton.innerHTML = `<i class="fas fa-${buttonClass}"></i>`;
+			audioButton.classList.toggle('playing');
+		}
+	});
 
 	//===append to root===//
 	playlist.appendChild(newSong);
+}
+
+function playlist_song_template({ title, artist, album, preview }) {
+	return `
+        <audio class="playlist__song--audio" src=${preview}></audio>
+        <div class="playlist__song--play-pause-container">
+            <button class="playlist__song--play-pause-button"><i class="fas fa-play"></i></button>
+        </div>
+        <span class="playlist__song--title">${title}</span>
+        <span class="playlist__song--info"><strong>${artist}</strong>: ${album}</span>
+    `;
 }

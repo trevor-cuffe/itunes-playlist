@@ -205,16 +205,39 @@ body {
     display: block;
     position: absolute;
     bottom: 0;
-    left: 10%;
-    width: 80%;
+    left: 5%;
+    width: 90%;
     height: 1px;
     background-color: #ccc; }
+  .playlist__song--play-pause-container {
+    display: inline-block;
+    flex: 0 0 4rem;
+    position: relative;
+    margin-right: 3rem; }
+  .playlist__song--play-pause-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background-color: #1b2d5f;
+    border: 1px solid #888;
+    color: #888;
+    font-size: 1.2rem; }
+    .playlist__song--play-pause-button:hover {
+      color: #fff;
+      border: 1px solid #fff; }
+    .playlist__song--play-pause-button:focus {
+      outline: none;
+      background-color: #3c65d8; }
   .playlist__song--title {
     display: inline-block;
-    flex-basis: 40%; }
+    flex: 1 1 40%; }
   .playlist__song--info {
     display: inline-block;
-    flex-basis: 50%;
+    flex: 1 1 60%;
     white-space: nowrap;
     overflow: hidden; }
 
