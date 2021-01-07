@@ -1,6 +1,10 @@
 function createPlaylist({ root, songsummary, renderItem }) {
 	root.innerHTML = `
-        <div class="playlist"></div>
+		<div class="playlist">
+			<div class="playlist__intro">
+				Search for some songs to add to your playlist!
+			</div>
+		</div>
     `;
 
 	songsummary.addEventListener('click', function(event) {

@@ -1,14 +1,29 @@
 .playlist-container {
-	padding: 1rem;
+	padding: 1rem 1rem;
 	border-radius: 0.5rem;
-	background-color: $color-blue-dark-3;
+	background-color: $color-blue-light-3;
+	position: relative;
 }
 
 .playlist {
+	@include scrollbar($color-blue-light-3, 1.6rem);
+
+	&__intro {
+		//hide by default
+		display: none;
+
+		//If it's the last child, it's the ONLY child, so it should be displayed
+		&:last-child {
+			display: block;
+			text-align: center;
+			color: $color-dark-grey;
+		}
+	}
+
 	&__song {
 		position: relative;
-		color: $color-white;
-		padding: 1rem;
+		color: $color-dark-grey;
+		padding: 1.5rem 1rem;
 		display: flex;
 		align-items: center;
 
@@ -38,19 +53,20 @@
 			height: 3rem;
 			width: 3rem;
 			border-radius: 50%;
-			background-color: $color-blue-dark-3;
-			border: 1px solid $color-grey;
-			color: $color-grey;
+			background-color: $color-blue-light-3;
+			border: 1px solid $color-dark-grey;
+			color: $color-dark-grey;
 			font-size: 1.2rem;
 
 			&:hover {
 				color: $color-white;
 				border: 1px solid $color-white;
+				cursor: pointer;
 			}
 
 			&:focus {
 				outline: none;
-				background-color: $color-blue-dark-1;
+				background-color: $color-blue-light-1;
 			}
 		}
 
@@ -63,6 +79,11 @@
 			flex: 1 1 60%;
 			white-space: nowrap;
 			overflow: hidden;
+		}
+
+		&:hover {
+			background-color: $color-blue-light-2;
+			color: $color-white;
 		}
 	}
 }

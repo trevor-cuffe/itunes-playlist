@@ -1,9 +1,27 @@
 .hero {
-	background-image: linear-gradient(to bottom, $color-blue-light-2, $color-blue-dark-1);
+	background-image: url('../images/hero3.jpg');
+	background-position: 50% 75%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 40rem;
+	position: relative;
+	// background-image: linear-gradient(to bottom, $color-blue-light-2, $color-blue-dark-1);
 
 	&__body {
+		display: block;
 		color: $color-white;
 		padding: 3rem;
+		width: 70%;
+		height: 40%;
+		margin: auto;
+		position: relative;
+		top: 25%;
+		border-radius: 3px;
+		z-index: 10;
+		background-color: rgba($color-dark-grey, 0.3);
+		backdrop-filter: blur(8px);
+		box-shadow: 6px 12px 10px rgba($color-black, 0.4);
+		animation: moveInBottom 1.5s;
 	}
 
 	&__title {

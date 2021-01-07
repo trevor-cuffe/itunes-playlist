@@ -1,7 +1,34 @@
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+
+	@include scrollbar($color-blue-dark-3, 2rem);
+}
+
+.hero {
+	flex: 0 0 auto;
+}
+
+.main {
+	flex: 1 1 100%;
+}
+
+.playlist-app {
+	background-color: $color-blue-dark-3;
+	height: 100%;
+}
+
 .autocomplete {
 	margin-bottom: 3rem;
 }
 
 .songSummary:not(.is-hidden) {
 	margin-bottom: 3rem;
+}
+
+.playlist {
+	max-height: 50vh;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
