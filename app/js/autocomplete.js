@@ -14,17 +14,10 @@
 //
 //--------------------------------------------------------------//
 
-function createAutoComplete({
-    root,
-    fetchData,
-    renderOption,
-    onOptionSelect,
-    setInputValue
-}) {
+function createAutoComplete({ root, fetchData, renderOption, onOptionSelect, setInputValue }) {
+	//=== Create HTML for AutoComplete ===//
 
-    //=== Create HTML for AutoComplete ===//
-
-    root.innerHTML = `
+	root.innerHTML = `
         <label>
             <span class="autocomplete__label">Search:</span>
             <input type="text" class="autocomplete__input">
@@ -37,74 +30,67 @@ function createAutoComplete({
 
     `;
 
-    //====================================//
+	//====================================//
 
+	// -------------------- //
+	// Set up DOM Variables //
+	// -------------------- //
 
-    // -------------------- //
-    // Set up DOM Variables //
-    // -------------------- //
+	const input = root.querySelector('.autocomplete__input');
+	const dropdown = root.querySelector('.autocomplete__dropdown');
+	const resultsWrapper = root.querySelector('.autocomplete__results');
 
-    const input = root.querySelector('.autocomplete__input');
-    const dropdown = root.querySelector('.autocomplete__dropdown');
-    const resultsWrapper = root.querySelector('.autocomplete__results');
+	// User Input
 
-    // User Input
+	const getSearchResults = async (event) => {
+		//get results from input string
+		const results = await fetchData(event.target.value);
 
-    const getSearchResults = async event => {
+		//reset results wrapper
+		resultsWrapper.innerHTML = '';
 
-        //get results from input string
-        const results = await fetchData(event.target.value);
-        console.dir(results);
+		//GUARD: if there are no results
+		if (!results.length) {
+			dropdown.classList.remove('is-active');
+			return;
+		}
 
-        //reset results wrapper
-        resultsWrapper.innerHTML = '';
+		dropdown.classList.add('is-active');
 
-        //GUARD: if there are no results
-        if (!results.length) {
-            dropdown.classList.remove('is-active');
-            return;
-        }
+		//set up DOM Element for each result
+		for (let result of results) {
+			let option = document.createElement('a');
 
-        dropdown.classList.add('is-active');
+			option.classList.add('autocomplete__dropdown-item');
+			option.innerHTML = renderOption(result);
 
-        //set up DOM Element for each result
-        for(let result of results) {
+			option.addEventListener('click', (event) => {
+				dropdown.classList.remove('is-active');
+				input.value = setInputValue(result);
+				onOptionSelect(result, event);
+			});
 
-            let option = document.createElement('a');
+			resultsWrapper.appendChild(option);
+		}
+	};
 
-            option.classList.add('autocomplete__dropdown-item');
-            option.innerHTML = renderOption(result);
+	input.addEventListener('input', debounce(getSearchResults, 500));
 
-            option.addEventListener('click', (event) => {
-                dropdown.classList.remove('is-active');
-                input.value = setInputValue(result);
-                onOptionSelect(result, event);
-            })
+	input.addEventListener('submit', getSearchResults);
 
-            resultsWrapper.appendChild(option);
-        }
+	//*** Remove dropdown when user clicks outside ***//
 
-    }
+	document.addEventListener('click', (event) => {
+		if (!root.contains(event.target)) {
+			dropdown.classList.remove('is-active');
+		}
+	});
 
-    input.addEventListener('input', debounce(getSearchResults, 500));
+	//*** If there are results, restore them on input focus ***//
 
-    input.addEventListener('submit', getSearchResults);
-
-
-    //*** Remove dropdown when user clicks outside ***//
-
-    document.addEventListener('click', event => {
-        if(!root.contains(event.target)) {
-            dropdown.classList.remove('is-active');
-        }
-    });
-
-    //*** If there are results, restore them on input focus ***//
-
-    input.addEventListener('focusin', () => {
-        if(resultsWrapper.innerHTML !== '') {
-            dropdown.classList.add('is-active');
-        }
-    });
-    
+	input.addEventListener('focusin', () => {
+		if (resultsWrapper.innerHTML !== '') {
+			dropdown.classList.add('is-active');
+		}
+	});
 }

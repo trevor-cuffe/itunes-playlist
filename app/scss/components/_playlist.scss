@@ -1,12 +1,12 @@
 .playlist-container {
 	padding: 1rem 1rem;
 	border-radius: 0.5rem;
-	background-color: $color-blue-light-3;
+	background-color: $color-blue-dark-3;
 	position: relative;
 }
 
 .playlist {
-	@include scrollbar($color-blue-light-3, 1.6rem);
+	@include scrollbar($color-blue-dark-3, 1.6rem);
 
 	&__intro {
 		//hide by default
@@ -16,13 +16,13 @@
 		&:last-child {
 			display: block;
 			text-align: center;
-			color: $color-dark-grey;
+			color: $color-light-grey;
 		}
 	}
 
 	&__song {
 		position: relative;
-		color: $color-dark-grey;
+		color: $color-white;
 		padding: 1.5rem 1rem;
 		display: flex;
 		align-items: center;
@@ -53,9 +53,9 @@
 			height: 3rem;
 			width: 3rem;
 			border-radius: 50%;
-			background-color: $color-blue-light-3;
-			border: 1px solid $color-dark-grey;
-			color: $color-dark-grey;
+			background-color: $color-blue-dark-3;
+			border: 1px solid $color-grey;
+			color: $color-grey;
 			font-size: 1.2rem;
 
 			&:hover {
@@ -66,24 +66,36 @@
 
 			&:focus {
 				outline: none;
-				background-color: $color-blue-light-1;
+				background-color: $color-blue-dark-1;
 			}
 		}
 
-		&--title {
+		&--col {
 			display: inline-block;
-			flex: 1 1 40%;
-		}
-		&--info {
-			display: inline-block;
-			flex: 1 1 60%;
 			white-space: nowrap;
 			overflow: hidden;
 		}
 
+		&--col-1 {
+			flex: 1 1 40%;
+			padding-right: 0.5rem;
+		}
+
+		&--col-2 {
+			flex: 1 1 60%;
+		}
+
 		&:hover {
-			background-color: $color-blue-light-2;
+			background-color: $color-blue-dark-2;
 			color: $color-white;
+		}
+
+		&--title:hover,
+		&--info:hover {
+			&.long {
+				display: inline-block;
+				animation: scrollFromRight 10s linear 2s infinite;
+			}
 		}
 	}
 }

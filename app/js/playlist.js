@@ -45,23 +45,7 @@ function addItemToPlaylist(playlist, { title, artist, album, preview }) {
 	newSong.addEventListener('click', function(event) {
 		//check if the user clicked on the audio button or it's containing elements
 		if (event.target.closest('.playlist__song--play-pause-button')) {
-			let audioElement = this.querySelector('.playlist__song--audio');
-			let audioButton = this.querySelector('.playlist__song--play-pause-button');
-
-			//decide whether to play or pause the audio
-			const pause = audioButton.classList.contains('playing');
-
-			//run method in audio controls
-			if (pause) {
-				audioElement.pause();
-			} else {
-				audioElement.play();
-			}
-
-			//change button
-			const buttonClass = pause ? 'play' : 'pause';
-			audioButton.innerHTML = `<i class="fas fa-${buttonClass}"></i>`;
-			audioButton.classList.toggle('playing');
+			playPause(this);
 		}
 	});
 
@@ -74,15 +58,50 @@ function addItemToPlaylist(playlist, { title, artist, album, preview }) {
 
 	//===append to root===//
 	playlist.appendChild(newSong);
+
+	//===add event listener for audio stopping===//
+	//*This has to be after appending to the parent, because it depends on other elements in the playlist
+	newSong.querySelector('audio').addEventListener('ended', function() {
+		const nextSong = newSong.nextSibling;
+
+		playPause(newSong);
+
+		if (nextSong && nextSong.classList.contains('playlist__song')) {
+			playPause(nextSong);
+		}
+	});
 }
 
 function playlist_song_template({ title, artist, album, preview }) {
+	const longTitle = title.length > 35 ? 'long' : '';
+	const longInfo = artist.length + album.length > 50 ? 'long' : '';
 	return `
         <audio class="playlist__song--audio" src=${preview}></audio>
         <div class="playlist__song--play-pause-container">
             <button class="playlist__song--play-pause-button"><i class="fas fa-play"></i></button>
-        </div>
-        <span class="playlist__song--title">${title}</span>
-        <span class="playlist__song--info"><strong>${artist}</strong>: ${album}</span>
+		</div>
+		<div class="playlist__song--col playlist__song--col-1">
+			<span class="playlist__song--title ${longTitle}">${title}</span>
+		</div>
+		<div class="playlist__song--col playlist__song--col-2">
+			<span class="playlist__song--info ${longInfo}"><strong>${artist}</strong>: ${album}</span>
+		</div>
     `;
+}
+
+//Connects the functionality of the audio element to the custom play/pause button
+function playPause(song) {
+	//set up audio and button elements
+	let audioElement = song.querySelector('.playlist__song--audio');
+	let audioButton = song.querySelector('.playlist__song--play-pause-button');
+
+	const pause = audioButton.classList.contains('playing');
+
+	//run method in audio controls
+	pause ? audioElement.pause() : audioElement.play();
+
+	//change button
+	const buttonClass = pause ? 'play' : 'pause';
+	audioButton.innerHTML = `<i class="fas fa-${buttonClass}"></i>`;
+	audioButton.classList.toggle('playing');
 }

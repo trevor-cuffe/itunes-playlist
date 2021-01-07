@@ -1,7 +1,7 @@
 body {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: 120vh;
 
 	@include scrollbar($color-blue-dark-3, 2rem);
 }
@@ -15,7 +15,7 @@ body {
 }
 
 .playlist-app {
-	background-color: $color-blue-dark-3;
+	background-color: $color-blue-darkest;
 	height: 100%;
 }
 
