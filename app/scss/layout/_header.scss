@@ -1,5 +1,6 @@
 .hero {
-	background-image: url('../images/hero3.jpg');
+	background-image: linear-gradient(to bottom, transparent, transparent 70%, $color-blue-darkest 100%),
+		url('../images/hero3.jpg');
 	background-position: 50% 75%;
 	background-size: cover;
 	background-repeat: no-repeat;

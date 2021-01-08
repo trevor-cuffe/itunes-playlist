@@ -1,21 +1,23 @@
-body {
-	display: flex;
-	flex-direction: column;
-	height: 120vh;
+html {
+	background-color: $color-blue-darkest;
+}
 
+body {
 	@include scrollbar($color-blue-dark-3, 2rem);
 }
 
 .hero {
-	flex: 0 0 auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 .main {
-	flex: 1 1 100%;
+	margin-top: 30rem;
 }
 
 .playlist-app {
-	background-color: $color-blue-darkest;
 	height: 100%;
 }
 

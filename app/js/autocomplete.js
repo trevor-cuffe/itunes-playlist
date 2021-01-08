@@ -20,7 +20,7 @@ function createAutoComplete({ root, fetchData, renderOption, onOptionSelect, set
 	root.innerHTML = `
         <label>
             <span class="autocomplete__label">Search:</span>
-            <input type="text" class="autocomplete__input">
+            <input type="text" class="autocomplete__input" placeholder="Search...">
         </label>
         <div class="autocomplete__dropdown">
             <div class="autocomplete__dropdown--menu">
