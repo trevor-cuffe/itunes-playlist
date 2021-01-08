@@ -158,7 +158,8 @@ body {
     top: 100%;
     max-width: 100%;
     min-width: 70%;
-    background-color: #014697;
+    background-color: rgba(1, 70, 151, 0.6);
+    backdrop-filter: blur(3px);
     z-index: 10; }
     .autocomplete__dropdown.is-active {
       height: unset;
@@ -229,7 +230,7 @@ body {
       left: 10%;
       border-bottom: 1px solid #888; }
     .autocomplete__dropdown-item:hover {
-      background-color: #c8d7ff;
+      background-color: rgba(255, 255, 255, 0.7);
       cursor: pointer; }
       .autocomplete__dropdown-item:hover img {
         transform: scale(1.2);

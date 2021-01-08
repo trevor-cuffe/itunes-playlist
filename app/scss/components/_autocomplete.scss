@@ -39,7 +39,8 @@
 		top: 100%;
 		max-width: 100%;
 		min-width: 70%;
-		background-color: $color-blue-dark-2;
+		background-color: rgba($color-blue-dark-2, 0.6);
+		backdrop-filter: blur(3px);
 		z-index: 10;
 
 		&.is-active {
@@ -125,7 +126,7 @@
 		}
 
 		&:hover {
-			background-color: $color-blue-grey-light;
+			background-color: rgba($color-white, 0.7);
 			cursor: pointer;
 
 			img {
