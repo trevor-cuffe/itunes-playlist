@@ -91,17 +91,44 @@ function playlist_song_template({ title, artist, album, preview }) {
 
 //Connects the functionality of the audio element to the custom play/pause button
 function playPause(song) {
-	//set up audio and button elements
-	let audioElement = song.querySelector('.playlist__song--audio');
-	let audioButton = song.querySelector('.playlist__song--play-pause-button');
+	if (song.classList.contains('playing')) {
+		//PAUSE
+		pauseSong(song);
+	} else {
+		//PLAY
 
-	const pause = audioButton.classList.contains('playing');
+		//pause other songs before playing
+		pauseAllPlaying();
 
-	//run method in audio controls
-	pause ? audioElement.pause() : audioElement.play();
+		playSong(song);
+	}
+}
 
-	//change button
-	const buttonClass = pause ? 'play' : 'pause';
-	audioButton.innerHTML = `<i class="fas fa-${buttonClass}"></i>`;
-	audioButton.classList.toggle('playing');
+function pauseAllPlaying() {
+	const playingSongs = document.querySelectorAll('.playlist__song.playing');
+	for (let song of playingSongs) {
+		pauseSong(song);
+	}
+}
+
+function pauseSong(song) {
+	//pause the audio
+	song.querySelector('audio').pause();
+
+	//update button icon
+	song.querySelector('.playlist__song--play-pause-button').innerHTML = '<i class="fas fa-play"></i>';
+
+	//update song class to reflect that it is no longer playing
+	song.classList.remove('playing');
+}
+
+function playSong(song) {
+	//pause the audio
+	song.querySelector('audio').play();
+
+	//update button icon
+	song.querySelector('.playlist__song--play-pause-button').innerHTML = '<i class="fas fa-pause"></i>';
+
+	//update song class to reflect that it is no longer playing
+	song.classList.add('playing');
 }
