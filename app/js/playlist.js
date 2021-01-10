@@ -123,7 +123,8 @@ function pauseSong(song) {
 }
 
 function playSong(song) {
-	//pause the audio
+	//play the audio
+	fadeAudio(song.querySelector('audio'), 0, 1, 2);
 	song.querySelector('audio').play();
 
 	//update button icon
@@ -131,4 +132,29 @@ function playSong(song) {
 
 	//update song class to reflect that it is no longer playing
 	song.classList.add('playing');
+}
+
+function fadeAudio(element, startVolume = null, newVolume, time) {
+	//time should be defined in seconds
+	//volume goes from 0 to 1, startVolume is optional
+
+	if (startVolume !== null) {
+		element.volume = startVolume;
+	}
+
+	const increment = (newVolume - element.volume) / (20 * time);
+	const fade = setInterval(() => {
+		element.volume = (element.volume + increment).toFixed(8);
+		if (element.volume <= 0) {
+			element.volume = 0;
+			clearInterval(fade);
+		} else if (element.volume >= 1) {
+			element.volume = 1;
+			clearInterval(fade);
+		}
+	}, 50);
+
+	setTimeout(() => {
+		clearInterval(fade);
+	}, time * 1000);
 }
