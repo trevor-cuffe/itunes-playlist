@@ -326,10 +326,10 @@ body {
     white-space: nowrap;
     overflow: hidden; }
   .playlist__song--col-1 {
-    flex: 1 1 40%;
-    padding-right: 0.5rem; }
+    flex: 1 1 40%; }
   .playlist__song--col-2 {
-    flex: 1 1 60%; }
+    flex: 1 1 60%;
+    margin-left: 0.75rem; }
   .playlist__song:hover {
     background-color: #014697;
     color: #fff; }
