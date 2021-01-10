@@ -17,11 +17,11 @@
 @keyframes moveInRight {
 	0% {
 		opacity: 0;
-		transform: translateX(10rem);
+		transform: translateX(8rem);
 	}
 
 	75% {
-		transform: translateX(-0.5rem);
+		transform: translateX(-0.2rem);
 	}
 
 	100% {
@@ -58,6 +58,16 @@
 	}
 
 	92% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
 		opacity: 1;
 	}
 }

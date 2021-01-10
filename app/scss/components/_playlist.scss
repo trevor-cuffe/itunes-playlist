@@ -3,6 +3,9 @@
 	border-radius: 0.5rem;
 	background-color: $color-blue-dark-3;
 	position: relative;
+
+	animation: fadeIn 1s ease-out 1.5s;
+	animation-fill-mode: backwards;
 }
 
 .playlist {
@@ -13,7 +16,7 @@
 		display: none;
 
 		//If it's the last child, it's the ONLY child, so it should be displayed
-		&:last-child {
+		&:only-child {
 			display: block;
 			text-align: center;
 			color: $color-light-grey;
@@ -50,6 +53,9 @@
 		&--play-pause-button {
 			@include center-x-y;
 
+			// Hidden, exept for case listed below
+			opacity: 0;
+
 			height: 3rem;
 			width: 3rem;
 			border-radius: 50%;
@@ -68,6 +74,11 @@
 				outline: none;
 				background-color: $color-blue-dark-1;
 			}
+		}
+
+		&.playing &--play-pause-button,
+		&:hover &--play-pause-button {
+			opacity: 1;
 		}
 
 		&--col {

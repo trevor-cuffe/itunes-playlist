@@ -93,9 +93,14 @@
 
 			&:hover {
 				cursor: pointer;
-				transform: translate(-50%, -50%) translateY(-0.2rem);
-				box-shadow: 0 0.2rem 0.3rem 0.1rem rgba($color-black, 0.3);
+				transform: translate(-50%, -50%) translateY(-0.3rem);
+				box-shadow: 0 0.3rem 0.4rem 0.1rem rgba($color-black, 0.3);
 				background-color: $color-blue-dark-1;
+			}
+
+			&:active {
+				transform: translate(-50%, -50%) translateY(-0.1rem);
+				box-shadow: 0 0.2rem 0.1rem rgba($color-black, 0.3);
 			}
 
 			&:focus {
