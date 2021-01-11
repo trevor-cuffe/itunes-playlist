@@ -293,6 +293,14 @@ body {
     width: 90%;
     height: 1px;
     background-color: #ccc; }
+  .playlist__song.dragging {
+    filter: brightness(0.5); }
+  .playlist__song.draggedOver {
+    background-color: #16428b; }
+    .playlist__song.draggedOver.top {
+      border-top: 2px solid green; }
+    .playlist__song.draggedOver.bottom {
+      border-bottom: 2px solid green; }
   .playlist__song--play-pause-container {
     display: inline-block;
     flex: 0 0 4rem;

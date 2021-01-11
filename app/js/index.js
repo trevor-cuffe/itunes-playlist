@@ -150,5 +150,20 @@ const playlist = document.querySelector('.playlist-container');
 createPlaylist({
 	root        : playlist,
 	songsummary : songSummary,
-	renderItem  : (newItem) => {}
+	renderItem  : ({ title, artist, album, preview }) => {
+		const longTitle = title.length > 35 ? 'long' : '';
+		const longInfo = artist.length + album.length > 50 ? 'long' : '';
+		return `
+			<audio class="playlist__song--audio" src=${preview}></audio>
+			<div class="playlist__song--play-pause-container">
+				<button class="playlist__song--play-pause-button"><i class="fas fa-play"></i></button>
+			</div>
+			<div class="playlist__song--col playlist__song--col-1">
+				<span class="playlist__song--title ${longTitle}">${title}</span>
+			</div>
+			<div class="playlist__song--col playlist__song--col-2">
+				<span class="playlist__song--info ${longInfo}"><strong>${artist}</strong>: ${album}</span>
+			</div>
+		`;
+	}
 });

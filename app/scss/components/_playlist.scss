@@ -43,6 +43,22 @@
 			}
 		}
 
+		&.dragging {
+			filter: brightness(0.5);
+		}
+
+		&.draggedOver {
+			background-color: lighten($color-blue-dark-3, 10%);
+
+			&.top {
+				border-top: 2px solid green;
+			}
+
+			&.bottom {
+				border-bottom: 2px solid green;
+			}
+		}
+
 		&--play-pause-container {
 			display: inline-block;
 			flex: 0 0 4rem;
